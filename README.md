@@ -14,7 +14,7 @@ Estensione per Google Chrome che permette di:
 
 ---
 
-## 🚀 Installazione (da codice sorgente)
+## Installazione:
 1. Clona il repository o scarica lo zip:
    ```bash
    git clone https://github.com/FriedrichBraun/estrattore_pdf_gmail.git
