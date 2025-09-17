@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estrattore - Downloader di PDF da Gmail</title>
+  <style>
+    :root{ --bg:#0b0d10; --panel:#12161b; --muted:#9aa7b2; --accent:#4f8cff; --ok:#3ddc97; --warn:#ff5d6c; --border:#1f2a33; }
+    *{ box-sizing:border-box; }
+    body{ margin:0; background:var(--bg); color:#e6edf3; font:14px/1.4 system-ui,Segoe UI,Roboto,Arial; width:395px; }
+    header{ padding:14px 16px; background:linear-gradient(180deg, #111722, #0e141d); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+    .logo{ width:10px; height:10px; background:var(--accent); border-radius:3px; box-shadow:0 0 14px var(--accent); }
+    h1{ font-size:14px; margin:0; letter-spacing:.3px; }
+    main{ padding:14px 16px; }
+    label{ display:block; font-weight:600; margin:8px 0 6px; color:#cdd9e5; }
+    input[type="text"]{ width:100%; padding:9px 10px; border-radius:10px; background:#0f1319; border:1px solid var(--border); color:#e6edf3; }
+    .row{ display:flex; gap:8px; }
+    button{ padding:9px 10px; border-radius:10px; border:1px solid var(--border); background:#0f1319; color:#e6edf3; cursor:pointer; }
+    button.primary{ background:var(--accent); border-color:transparent; color:#fff; }
+    button.warn{ background:#1b1113; border-color:#432024; color:#ff8791; }
+    button.ghost{ background:#0f1319; }
+    button:disabled{ opacity:.5; cursor:not-allowed; }
+    .muted{ color:var(--muted); font-size:12px; }
+    #log{ margin-top:10px; height:150px; overflow:auto; border:1px dashed var(--border); padding:8px; background:#0b0f14; border-radius:10px; }
+    .ok{ color:var(--ok); } .warnText{ color:#ff5d6c; }
+    .stats{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+    .card{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:10px; }
+    .k{ font-size:12px; color:#9aa7b2; }
+    .v{ font-weight:700; font-size:16px; }
+    .progress{ height:8px; background:#0f1319; border:1px solid var(--border); border-radius:999px; overflow:hidden; margin-top:8px;}
+    .bar{ height:100%; width:0%; background:var(--accent); transition:width .2s ease; }
+    .small{ font-size:11px; color:#9aa7b2; margin-top:6px; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"></div>
+    <h1>Estrattore - Downloader di PDF da Gmail</h1>
+  </header>
+  <main>
+    <div class="row">
+      <button id="connectBtn" class="primary" style="flex:1">Connetti / Scegli account</button>
+    </div>
+    <div class="small" id="who"></div>
+    <label for="query">Query Gmail</label>
+    <input id="query" type="text" placeholder="es. from:azienda-srl@gmail.com" />
+    <label for="nameFilter">Filtro nome file (regex, opz.)</label>
+    <input id="nameFilter" type="text" placeholder="es. ^FATTURA_2025_.*\.pdf$" />
+    <div class="row" style="margin-top:10px;">
+      <button id="startBtn" class="ghost">Avvia</button>
+      <button id="downloadBtn" class="primary" disabled>Scarica ZIP</button>
+      <button id="cancelBtn" class="warn">Stop</button>
+      <button id="resetBtn" class="ghost">Reset</button>
+    </div>
+    <div class="stats">
+      <div class="card"><div class="k">Email analizzate</div><div class="v" id="s_msg">0</div><div class="progress"><div class="bar" id="p_msg"></div></div></div>
+      <div class="card"><div class="k">PDF trovati</div><div class="v" id="s_pdf">0</div><div class="progress"><div class="bar" id="p_pdf"></div></div></div>
+    </div>
+    <div class="small" id="diag"></div>
+    <div id="log" class="muted">Pronto.</div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

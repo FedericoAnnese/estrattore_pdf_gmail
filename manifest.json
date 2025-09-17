@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Estrattore - Downloader di PDF da Gmail",
+  "description": "Cerca email su Gmail secondo una query e scarica tutti gli allegati PDF trovati.",
+  "version": "1.0.0",
+  "action": {
+    "default_title": "Estrattore - Downloader di PDF da Gmail",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "identity",
+    "downloads",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/*"
+  ],
+  "icons": {
+    "16": "gmail-pdf-downloader.png",
+    "48": "gmail-pdf-downloader.png",
+    "128": "gmail-pdf-downloader.png"
+  },
+  "oauth2": {
+    "client_id": "206612498563-8urffrkvcjgp3otpj1si1bqmuee581o6.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly"
+    ]
+  },
+  "background": {
+    "service_worker": "service_worker.js"
+  }
+}
